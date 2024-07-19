@@ -1,0 +1,31 @@
+.Main-content {
+    display: flex;
+    /* justify-content: space-around; */
+    padding: 20px;
+    margin-left: 500px;
+  }
+  
+  .go-section button, .select-section button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 10px;
+  }
+  
+  button {
+    padding: 10px 20px;
+    font-size: 16px;
+  }
+  .image-container {
+    margin-top: 50px;
+    margin-left: 500px;
+
+  }
+  
+  .selected-image {
+    max-width: 300px;
+    max-height: 300px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
