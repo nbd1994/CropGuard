@@ -1,4 +1,3 @@
-/* src/components/Navbar.css */
 
 .navbar {
     display: flex;
@@ -7,28 +6,35 @@
     padding: 10px 20px;
     background-color: #f8f9fa;
     border-bottom: 1px solid #ccc;
-  }
-  
-  .navbar-content {
+    position: fixed; 
+    top: 0;          
+    left: 0;        
+    width: 100%;    
+    z-index: 1000;   
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+}
+
+.navbar-content {
     display: flex;
     justify-content: space-between;
     width: 100%;
-  }
-  .navbar-left{
-    border:1px solid black;
-    border-radius:5px;
-    background-color:red;
-    color:white;
+}
+
+.navbar-left {
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: red;
+    color: white;
     margin-left: 100px;
-  }
-  .navbar-left span,
-  .navbar-right span {
+}
+
+.navbar-left span,
+.navbar-right span {
     margin: 0 10px;
     cursor: pointer;
-  }
-  
-  .navbar-left span:hover,
-  .navbar-right span:hover {
+}
+
+.navbar-left span:hover,
+.navbar-right span:hover {
     text-decoration: underline;
-  }
-  
+}
