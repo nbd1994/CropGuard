@@ -64,7 +64,7 @@ public class View {
     @PostMapping("/upload")
     public ResponseEntity<String> upload(
             @RequestParam("picture") MultipartFile file,
-            @RequestParam("name") String name
+            @RequestParam(value = "plant_type", defaultValue = "") String plant_type
     ) throws IOException {
         Files.createDirectories(Paths.get("uploads"));
         String filename=file.getOriginalFilename();
@@ -73,7 +73,19 @@ public class View {
         if(!images.contains(extension)){
             return ResponseEntity.badRequest().body("Invalid file type");
         }
-        Files.copy(file.getInputStream(), Paths.get("uploads", file.getOriginalFilename()));
-        return ResponseEntity.ok(extension);
+        var file_path=Paths.get("uploads", file.getOriginalFilename());
+        Files.copy(file.getInputStream(), file_path);
+        Resource promptImage=new UrlResource(file_path.toUri());
+
+//        return ResponseEntity.ok("xo");
+        return ResponseEntity.ok(chatlient
+                        .prompt()
+                        .user(data -> {
+                            data.media(new Media(MimeTypeUtils.IMAGE_JPEG, promptImage));
+                            data.text("Does this {type} plant look healthy?")
+                                    .param("type", plant_type);
+                        })
+                        .call()
+                        .content());
     }
 }
