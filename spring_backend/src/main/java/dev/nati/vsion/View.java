@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.util.MimeTypeUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import reactor.core.publisher.Flux;
 
 import java.io.*;
 import java.net.MalformedURLException;
@@ -35,18 +36,6 @@ public class View {
         images.addAll(List.of("jpg","png","jpeg","gif"));
     }
 
-    @GetMapping("images")
-    public String image(
-            @RequestParam(value = "message", defaultValue = "why is the sky blue") String message
-    ) {
-        return chatlient
-                .prompt()
-                .user(message)
-                .call()
-                .content();
-
-    }
-
     @GetMapping("/ai/llava")
     public String imageprocessor() throws MalformedURLException {
         Path imagepath = Paths.get("src/main/resources/mangoshoot_sml.jpg");
@@ -65,7 +54,7 @@ public class View {
     public ResponseEntity<String> upload(
             @RequestParam("picture") MultipartFile file,
             @RequestParam(value = "plant_type", defaultValue = "") String plant_type
-    ) throws IOException {
+    ) throws IOException, InterruptedException {
         Files.createDirectories(Paths.get("uploads"));
         String filename=file.getOriginalFilename();
         int indexOfDot=filename.indexOf(".");
@@ -82,10 +71,19 @@ public class View {
                         .prompt()
                         .user(data -> {
                             data.media(new Media(MimeTypeUtils.IMAGE_JPEG, promptImage));
-                            data.text("Does this {type} plant look healthy?")
+                            data.text("Does this {type} plant look healthy is not what is affecting it?")
                                     .param("type", plant_type);
                         })
                         .call()
                         .content());
     }
+    @GetMapping("/ai/stream")
+    public Flux<String> streamGeneration(){
+        return chatlient
+                .prompt()
+                .user("What is the meaning of life?")
+                .stream()
+                .content();
+    }
+
 }
