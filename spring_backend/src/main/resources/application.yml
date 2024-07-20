@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: vsion
+  ai:
+    ollama:
+      chat:
+        options:
+          model: llava
+
