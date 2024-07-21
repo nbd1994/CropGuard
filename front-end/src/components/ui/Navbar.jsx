@@ -4,10 +4,12 @@ import React from 'react';
 
 const Navbar = () => {
   return (
-    <nav className="navbar">
+    <nav className="navbar hidden md:block">
       <div className="navbar-content">
-        <div className="navbar-left">
-           <scan>Unity</scan>
+        <div className="navbar-left  bg-zinc-700">
+            <span className=' font-extrabold shadow-xl text-white'>
+            CG
+            </span>
         </div>
         <div className="navbar-right">
           <span>Status</span>

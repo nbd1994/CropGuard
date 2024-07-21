@@ -11,8 +11,8 @@ function FormPage() {
 const [response,setResponse] = useState("");
 const [finished,setFinished] = useState(true);
 const [picture,setPicture] = useState(pic);
-    const fileInput = useRef(null);
-    const handleButtonClick = () => {
+const fileInput = useRef(null);
+const handleButtonClick = () => {
         fileInput.current.click();
 
     };
@@ -34,10 +34,10 @@ const [picture,setPicture] = useState(pic);
             setFinished(true)
         })
     }
-    return  <Card className="grid w-fit h-lvh grid-cols-2 py-4" >
+    return  <Card className="grid w-fit max-w-5xl h-max grid-cols-1 md:grid-cols-2 py-4 md:my-4 bg-slate-50" >
 
     <form onSubmit={handleSubmit} 
-    className='grid justify-items-center  gap-8 my-8'
+    className='grid justify-items-center gap-8 my-8 opacity-100'
     >
                 
                 <input type='file' 
@@ -47,7 +47,7 @@ const [picture,setPicture] = useState(pic);
                 onChange={e=>setPicture(URL.createObjectURL(e.target.files[0]) )}
                 style={{display:"none"}}
                 />
-            <Card className="w-4/6">
+            <Card className="w-4/6 bg-zinc-50">
             <CardHeader>
                 <CardTitle>
                     Visual Input
@@ -69,18 +69,23 @@ const [picture,setPicture] = useState(pic);
                 </Button>
                 </CardFooter>
             </Card>
-            
-            <label htmlFor="plant_type" className="" >
+        
+
+            <label htmlFor="plant_type" className=" " >
                 Type
                 <Input type="text" name="plant_type" max={14}/>
                 <CardDescription>Enter the name of the plant for the picture <br/>you are uploading</CardDescription>
             </label>
 
-            <Button className="p-0">
+            <Button className="p-0" >
                 <Input type="submit" value="Analyze" />
+                
             </Button>
         </form>
-        <Response response={response} finished={finished}/>
+        <span className="flex justify-center">
+
+        <Response response={response} i finished={finished}/>
+        </span>
         </Card>
     
 }

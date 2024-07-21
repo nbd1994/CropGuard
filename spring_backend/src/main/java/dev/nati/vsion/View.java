@@ -17,6 +17,7 @@ import reactor.core.publisher.Flux;
 
 import java.io.*;
 import java.net.MalformedURLException;
+import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -63,7 +64,7 @@ public class View {
             return ResponseEntity.badRequest().body("Invalid file type");
         }
         var file_path=Paths.get("uploads", file.getOriginalFilename());
-        Files.copy(file.getInputStream(), file_path);
+        if(Files.notExists(file_path))Files.copy(file.getInputStream(), file_path);
         Resource promptImage=new UrlResource(file_path.toUri());
 
 //        return ResponseEntity.ok("xo");

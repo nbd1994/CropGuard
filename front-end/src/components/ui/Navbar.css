@@ -10,7 +10,8 @@
     top: 0;          
     left: 0;        
     width: 100%;    
-    z-index: 1000;   
+    height: fit-content;
+    z-index: 10;   
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
 }
 
@@ -21,10 +22,8 @@
 }
 
 .navbar-left {
-    border: 1px solid black;
+    border: 1px solid;
     border-radius: 5px;
-    background-color: red;
-    color: white;
     margin-left: 100px;
 }
 
